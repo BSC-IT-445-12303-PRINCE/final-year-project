@@ -1,0 +1,188 @@
+<% layout("./listing/layouts/boilerplate") %>
+
+
+<style>
+    #filters-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    overflow-x: auto;
+    padding: 10px 0;
+}
+
+#filters {
+    display: flex;
+    gap: 20px;
+    flex-wrap: nowrap;
+}
+
+.filter-link {
+    text-decoration: none;
+    color: black;
+}
+
+.filter {
+    text-align: center;
+    opacity: 0.7;
+    transition: 0.3s;
+}
+
+.filter:hover {
+    opacity: 1;
+}
+
+.filter.active {
+    border-bottom: 2px solid black;
+    opacity: 1;
+}
+
+.icon {
+    font-size: 20px;
+}
+
+
+.tax-toggle {
+    background-color: #f8f8f8;
+    padding: 10px 18px;
+    border-radius: 30px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    font-size: 14px;
+}
+
+.toggle-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+}
+
+/* Hide default checkbox */
+.toggle-container input {
+    display: none;
+}
+
+/* Slider Design */
+.slider {
+    position: relative;
+    width: 45px;
+    height: 22px;
+    background-color: #ccc;
+    border-radius: 50px;
+    transition: 0.3s;
+}
+
+.slider::before {
+    content: "";
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    left: 2px;
+    top: 2px;
+    background-color: white;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+/* When checked */
+.toggle-container input:checked + .slider {
+    background-color: #ff385c; /* Airbnb color */
+}
+
+.toggle-container input:checked + .slider::before {
+    transform: translateX(23px);
+}
+
+.toggle-text {
+    font-weight: 500;
+    color: #333;
+}
+
+
+    .filter-link{
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .filter.active{
+        color: red;
+        font-weight: bold;
+    }
+</style>
+
+    <div id="filters-wrapper">
+
+  <div id="filters">
+
+      <% categories.forEach(cat => { %>
+          <a href="/listings?category=<%= cat %>" class="filter-link">
+              <div class="filter <%= selectedCategory === cat ? 'active' : '' %>">
+
+                  <div class="icon">
+                      <i class="<%= categoryIcons[cat] %>"></i>
+                  </div>
+
+                  <p>
+                      <% if(cat === "iconic") { %>
+                          Iconic Cities
+                      <% } else if(cat === "pools") { %>
+                          Amazing Pools
+                      <% } else { %>
+                          <%= cat.charAt(0).toUpperCase() + cat.slice(1) %>
+                      <% } %>
+                  </p>
+
+              </div>
+          </a>
+      <% }) %>
+
+  </div>
+
+  <!-- Tax Toggle -->
+  <div class="tax-toggle">
+    <label class="toggle-container">
+        <span class="toggle-text">Display total after taxes</span>
+
+        <input type="checkbox" id="switchCheckDefault">
+        <span class="slider"></span>
+    </label>
+  </div>
+
+
+</div>
+
+
+    
+
+
+    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
+        <% for(let listing of allListings){ %>
+            <a href="/listings/<%= listing._id %>" class="listing-link">
+                <div class="card col listing-card">
+                    <img src="<%= listing.image.url %>" class="card-img-top" alt="listing_image" style="height: 20rem;">
+                    <div class="card-img-overlay"></div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            <b><%= listing.title %></b> <br>
+                            &#8377;<%= listing.price %> / night
+                            <i class="tax-info"> &nbsp; &nbsp;+18% GST</i>
+                        </p>
+                    </div>
+                </div>
+            </a>
+        <% } %>
+    </div> 
+
+
+    <script>
+        let taxSwitch = document.getElementById("switchCheckDefault");
+        taxSwitch.addEventListener("click", ()=>{
+          let taxInfo = document.getElementsByClassName("tax-info");
+          for(info of taxInfo){
+            if(info.style.display != "inline"){
+                info.style.display = "inline";
+            }else{
+                info.style.display = "none";
+            }
+          }
+        });
+    </script>
