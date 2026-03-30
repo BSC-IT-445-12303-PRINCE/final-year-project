@@ -13,8 +13,8 @@ module.exports.sendOTP = async (req, res) => {
         const { email, password } = req.body;
         console.log("Login attempt for:", email);
         
-        // Lazy load email service after dotenv is configured
-        const { sendOTPEmail } = require("../utils/emailService");
+        // Use SendGrid email service (HTTP API - works with Render)
+        const { sendOTPEmail } = require("../utils/sendgridEmail");
         
         const admin = await Admin.findOne({ email });
         console.log("Admin found:", admin ? "Yes" : "No");
@@ -32,25 +32,31 @@ module.exports.sendOTP = async (req, res) => {
             return res.redirect("/admin/login");
         }
 
-        const otp = admin.generateOTP();
+        // Generate OTP
+        const otp = Math.floor(100000 + Math.random() * 900000).toString();
         console.log("Generated OTP:", otp);
         
+        // Save OTP to admin
+        admin.otp = otp;
+        admin.otpExpires = Date.now() + 10 * 60 * 1000; // 10 minutes
         await admin.save();
         console.log("Admin saved with OTP");
-
+        
+        // Send OTP via SendGrid
         const emailSent = await sendOTPEmail(email, otp);
-        console.log("Email sent result:", emailSent);
-        if (!emailSent) {
-            req.flash("error", "Failed to send OTP. Please try again.");
+        
+        if (emailSent) {
+            req.flash("success", "OTP sent to your email!");
+        } else {
+            req.flash("error", "Failed to send OTP email. Please try again.");
             return res.redirect("/admin/login");
         }
-
+        
         req.session.adminEmail = email;
-        req.flash("success", "OTP sent to your email");
         res.redirect("/admin/verify-otp");
     } catch (error) {
-        console.error("Error in sendOTP:", error);
-        req.flash("error", "Something went wrong");
+        console.error("SendOTP Error:", error);
+        req.flash("error", "Something went wrong!");
         res.redirect("/admin/login");
     }
 };
