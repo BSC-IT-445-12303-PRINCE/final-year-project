@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #f8f9fa;
+        }
+        .sidebar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: white;
+        }
+        .sidebar .nav-link {
+            color: rgba(255,255,255,0.8);
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 0.25rem 0;
+            transition: all 0.3s;
+        }
+        .sidebar .nav-link:hover,
+        .sidebar .nav-link.active {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+        .main-content {
+            padding: 2rem;
+        }
+        .stat-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .users-icon {
+            background: linear-gradient(45deg, #4facfe, #00f2fe);
+            color: white;
+        }
+        .listings-icon {
+            background: linear-gradient(45deg, #fa709a, #fee140);
+            color: white;
+        }
+        .admin-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+        .btn-logout {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            transition: all 0.3s;
+        }
+        .btn-logout:hover {
+            background: rgba(255,255,255,0.3);
+            color: white;
+        }
+        .messages-icon {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+        }
+        .has-new-messages {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .has-new-messages .contact-count,
+        .has-new-messages .contact-label {
+            color: white !important;
+        }
+        .has-new-messages .contact-label {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3 col-lg-2 sidebar p-0">
+                <div class="p-3">
+                    <h4 class="mb-4">Admin Panel</h4>
+                    <nav class="nav flex-column">
+                        <a class="nav-link active" href="/admin/dashboard">
+                            <i class="fas fa-tachometer-alt me-2"></i> Dashboard
+                        </a>
+                        <a class="nav-link" href="/admin/users">
+                            <i class="fas fa-users me-2"></i> Users
+                        </a>
+                        <a class="nav-link" href="/admin/listings">
+                            <i class="fas fa-list me-2"></i> Listings
+                        </a>
+                        <a class="nav-link" href="/admin/reviews">
+                            <i class="fas fa-star me-2"></i> Reviews
+                        </a>
+                        <a class="nav-link" href="/admin/contacts">
+                            <i class="fas fa-envelope me-2"></i> Messages
+                            <% if (typeof newContacts !== 'undefined' && newContacts > 0) { %>
+                                <span class="badge bg-danger ms-2"><%= newContacts %></span>
+                            <% } %>
+                        </a>
+                        <a class="nav-link" href="/admin/settings">
+                            <i class="fas fa-cog me-2"></i> Settings
+                        </a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-9 col-lg-10 main-content">
+                <!-- Header -->
+                <div class="admin-header d-flex justify-content-between align-items-center">
+                    <div>
+                        <h2 class="mb-1">Welcome, <%= admin.email %></h2>
+                        <p class="mb-0">System Administration Dashboard</p>
+                    </div>
+                    <a href="/admin/logout" class="btn btn-logout">
+                        <i class="fas fa-sign-out-alt me-2"></i> Logout
+                    </a>
+                </div>
+
+                <!-- Flash Messages -->
+                <% if (error && error.length > 0) { %>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <%= error %>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                <% } %>
+                
+                <% if (success && success.length > 0) { %>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <%= success %>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                <% } %>
+
+                <!-- Statistics Cards -->
+                <div class="row mb-4">
+                    <div class="col-md-3 mb-3">
+                        <div class="stat-card">
+                            <div class="stat-icon users-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h3 class="mb-2"><%= totalUsers %></h3>
+                            <h5 class="text-muted">Total Users</h5>
+                            <a href="/admin/users" class="btn btn-sm btn-outline-primary mt-2">Manage Users</a>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="stat-card">
+                            <div class="stat-icon listings-icon">
+                                <i class="fas fa-list"></i>
+                            </div>
+                            <h3 class="mb-2"><%= totalListings %></h3>
+                            <h5 class="text-muted">Total Listings</h5>
+                            <a href="/admin/listings" class="btn btn-sm btn-outline-primary mt-2">Manage Listings</a>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="stat-card">
+                            <div class="stat-icon" style="background: linear-gradient(45deg, #f093fb, #f5576c); color: white;">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <h3 class="mb-2"><%= totalReviews %></h3>
+                            <h5 class="text-muted">Total Reviews</h5>
+                            <a href="/admin/reviews" class="btn btn-sm btn-outline-primary mt-2">Manage Reviews</a>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="stat-card <%= (typeof newContacts !== 'undefined' && newContacts > 0) ? 'has-new-messages' : '' %>">
+                            <div class="stat-icon messages-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <h3 class="mb-2 contact-count"><%= typeof totalContacts !== 'undefined' ? totalContacts : 0 %></h3>
+                            <h5 class="text-muted contact-label">Contact Messages</h5>
+                            <% if (typeof newContacts !== 'undefined' && newContacts > 0) { %>
+                                <span class="badge bg-danger mt-2"><%= newContacts %> New</span>
+                            <% } %>
+                            <a href="/admin/contacts" class="btn btn-sm btn-outline-primary mt-2">View Messages</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="stat-card">
+                            <h4 class="mb-3">Quick Actions</h4>
+                            <div class="row">
+                                <div class="col-md-3 mb-3">
+                                    <a href="/admin/users" class="btn btn-outline-primary w-100">
+                                        <i class="fas fa-users me-2"></i> Manage Users
+                                    </a>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <a href="/admin/listings" class="btn btn-outline-success w-100">
+                                        <i class="fas fa-list me-2"></i> Manage Listings
+                                    </a>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <a href="/admin/reviews" class="btn btn-outline-warning w-100">
+                                        <i class="fas fa-star me-2"></i> Manage Reviews
+                                    </a>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <a href="/admin/settings" class="btn btn-outline-info w-100">
+                                        <i class="fas fa-cog me-2"></i> Settings
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="stat-card">
+                            <h4 class="mb-3">Recent Activity</h4>
+                            <div class="list-group">
+                                <div class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <i class="fas fa-user-plus text-success me-2"></i>
+                                        New user registration
+                                    </div>
+                                    <small class="text-muted">2 minutes ago</small>
+                                </div>
+                                <div class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <i class="fas fa-list text-primary me-2"></i>
+                                        New listing created
+                                    </div>
+                                    <small class="text-muted">15 minutes ago</small>
+                                </div>
+                                <div class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <i class="fas fa-star text-warning me-2"></i>
+                                        New review posted
+                                    </div>
+                                    <small class="text-muted">1 hour ago</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</body>
+</html>

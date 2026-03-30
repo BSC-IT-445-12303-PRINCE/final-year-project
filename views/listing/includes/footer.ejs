@@ -1,14 +1,268 @@
 <footer>
     <div class="f-info">
-        <div class="f-info-socials">
-            <i class="fa-brands fa-square-facebook"></i>
-            <i class="fa-brands fa-square-instagram"></i>
-            <i class="fa-brands fa-linkedin"></i>
-        </div>
-        <div class="f-info-brand">&copy; Wanderlust Private Limited</div>
-        <div class="f-info-links">
-            <a href="/privacy">Privacy</a>
-            <a href="/terms">Terms</a>
+        <div class="container">
+            <!-- Main Footer Content -->
+            <div class="row mb-4">
+                <!-- Brand Section -->
+                <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+                    <div class="footer-brand">
+                        <h4 class="mb-3">
+                            <i class="fa-solid fa-compass me-2"></i>
+                            <span class="text-gradient">Wanderlust</span>
+                        </h4>
+                        <p class="footer-description">
+                            Discover amazing places to stay around the world. Your perfect getaway is just a click away.
+                        </p>
+                        <div class="footer-socials mt-3">
+                            <a href="https://www.instagram.com/mr_prince.62" target="_blank" class="social-link instagram">
+                                <i class="fa-brands fa-instagram"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/prince-kumar-354a" target="_blank" class="social-link linkedin">
+                                <i class="fa-brands fa-linkedin-in"></i>
+                            </a>
+                            <a href="https://www.facebook.com/princekumar2526" target="_blank" class="social-link facebook">
+                                <i class="fa-brands fa-facebook-f"></i>
+                            </a>
+                            <a href="https://twitter.com/princek79253542" target="_blank" class="social-link twitter">
+                                <i class="fa-brands fa-twitter"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+                    <h5 class="footer-title">Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="/listings"><i class="fa-solid fa-chevron-right me-1"></i> Explore</a></li>
+                        <li><a href="/listings/new"><i class="fa-solid fa-chevron-right me-1"></i> Add Listing</a></li>
+                        <li><a href="/login"><i class="fa-solid fa-chevron-right me-1"></i> Login</a></li>
+                        <li><a href="/singup"><i class="fa-solid fa-chevron-right me-1"></i> Sign Up</a></li>
+                    </ul>
+                </div>
+
+                <!-- Support -->
+                <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+                    <h5 class="footer-title">Support</h5>
+                    <ul class="footer-links">
+                        <li><a href="/privacy"><i class="fa-solid fa-chevron-right me-1"></i> Privacy Policy</a></li>
+                        <li><a href="/terms"><i class="fa-solid fa-chevron-right me-1"></i> Terms of Service</a></li>
+                        <li><a href="/help"><i class="fa-solid fa-chevron-right me-1"></i> Help Center</a></li>
+                        <li><a href="/contact"><i class="fa-solid fa-chevron-right me-1"></i> Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <!-- Admin & Contact -->
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="footer-title">Contact & Admin</h5>
+                    <ul class="footer-links">
+                        <li>
+                            <a href="/admin/login" class="admin-link">
+                                <i class="fa-solid fa-shield-halved me-2"></i> Admin Panel
+                            </a>
+                        </li>
+                        <li>
+                            <a href="mailto:princekumar46399@gmail.com">
+                                <i class="fa-solid fa-envelope me-2"></i> princekumar46399@gmail.com
+                            </a>
+                        </li>
+                        <li>
+                            <a href="tel:+918252676827">
+                                <i class="fa-solid fa-phone me-2"></i> +91 8252676827
+                            </a>
+                        </li>
+                        <li>
+                            <span class="text-white-50">
+                                <i class="fa-solid fa-location-dot me-2"></i> India
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-md-6 text-center text-md-start">
+                        <p class="mb-0">
+                            &copy; 2024 <strong>Wanderlust</strong>. Made with 
+                            <i class="fa-solid fa-heart text-danger"></i> by Prince Kumar
+                        </p>
+                    </div>
+                    <div class="col-md-6 text-center text-md-end mt-3 mt-md-0">
+                        <div class="footer-payments">
+                            <i class="fa-brands fa-cc-visa me-2" title="Visa"></i>
+                            <i class="fa-brands fa-cc-mastercard me-2" title="Mastercard"></i>
+                            <i class="fa-brands fa-cc-paypal me-2" title="PayPal"></i>
+                            <i class="fa-brands fa-cc-amex" title="American Express"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </footer>
+
+<style>
+    .f-info {
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        color: white;
+        padding: 4rem 0 1.5rem;
+        margin-top: auto;
+    }
+
+    .footer-brand h4 {
+        font-weight: 800;
+        font-size: 1.8rem;
+    }
+
+    .text-gradient {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .footer-description {
+        color: rgba(255,255,255,0.7);
+        line-height: 1.7;
+        font-size: 0.95rem;
+    }
+
+    .footer-socials {
+        display: flex;
+        gap: 12px;
+    }
+
+    .social-link {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        text-decoration: none;
+        transition: all 0.3s;
+        font-size: 1.2rem;
+    }
+
+    .social-link.instagram {
+        background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    }
+
+    .social-link.linkedin {
+        background: linear-gradient(45deg, #0077b5, #00a0dc);
+    }
+
+    .social-link.facebook {
+        background: linear-gradient(45deg, #1877f2, #42b72a);
+    }
+
+    .social-link.twitter {
+        background: linear-gradient(45deg, #1da1f2, #0d8ecf);
+    }
+
+    .social-link:hover {
+        transform: translateY(-5px) scale(1.1);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    }
+
+    .footer-title {
+        font-weight: 700;
+        font-size: 1.1rem;
+        margin-bottom: 1.5rem;
+        position: relative;
+        padding-bottom: 10px;
+    }
+
+    .footer-title::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 40px;
+        height: 3px;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        border-radius: 2px;
+    }
+
+    .footer-links {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .footer-links li {
+        margin-bottom: 0.8rem;
+    }
+
+    .footer-links a {
+        color: rgba(255,255,255,0.7);
+        text-decoration: none;
+        transition: all 0.3s;
+        font-size: 0.95rem;
+        display: flex;
+        align-items: center;
+    }
+
+    .footer-links a:hover {
+        color: white;
+        transform: translateX(5px);
+    }
+
+    .footer-links a.admin-link {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        padding: 8px 15px;
+        border-radius: 25px;
+        color: white;
+        font-weight: 600;
+        display: inline-flex;
+    }
+
+    .footer-links a.admin-link:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    }
+
+    .footer-bottom {
+        border-top: 1px solid rgba(255,255,255,0.1);
+        padding-top: 1.5rem;
+        margin-top: 2rem;
+    }
+
+    .footer-bottom p {
+        color: rgba(255,255,255,0.6);
+        font-size: 0.9rem;
+    }
+
+    .footer-payments {
+        font-size: 2rem;
+        color: rgba(255,255,255,0.5);
+    }
+
+    .footer-payments i {
+        transition: all 0.3s;
+    }
+
+    .footer-payments i:hover {
+        color: white;
+        transform: scale(1.1);
+    }
+
+    @media (max-width: 768px) {
+        .f-info {
+            padding: 3rem 0 1rem;
+        }
+        
+        .footer-brand h4 {
+            font-size: 1.5rem;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            font-size: 1rem;
+        }
+    }
+</style>

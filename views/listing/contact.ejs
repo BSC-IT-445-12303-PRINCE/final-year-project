@@ -1,0 +1,255 @@
+<% layout("./listing/layouts/boilerplate") %>
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card shadow-lg border-0">
+                <div class="card-body p-0">
+                    <div class="row g-0">
+                        <!-- Contact Info Side -->
+                        <div class="col-lg-5 contact-info-side">
+                            <div class="p-5 h-100 text-white">
+                                <h3 class="mb-4">Get in Touch</h3>
+                                <p class="mb-5">Have questions about a listing, booking, or need support? We're here to help!</p>
+
+                                <div class="contact-details">
+                                    <div class="contact-item mb-4">
+                                        <div class="icon-box">
+                                            <i class="fa-solid fa-phone"></i>
+                                        </div>
+                                        <div>
+                                            <small class="text-white-50">Phone</small>
+                                            <p class="mb-0">
+                                                <a href="tel:+918252676827" class="text-white text-decoration-none">+91 8252676827</a>
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="contact-item mb-4">
+                                        <div class="icon-box">
+                                            <i class="fa-solid fa-envelope"></i>
+                                        </div>
+                                        <div>
+                                            <small class="text-white-50">Email</small>
+                                            <p class="mb-0">
+                                                <a href="mailto:princekumar46399@gmail.com" class="text-white text-decoration-none">princekumar46399@gmail.com</a>
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="contact-item mb-4">
+                                        <div class="icon-box">
+                                            <i class="fa-solid fa-location-dot"></i>
+                                        </div>
+                                        <div>
+                                            <small class="text-white-50">Address</small>
+                                            <p class="mb-0">India</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="contact-item">
+                                        <div class="icon-box">
+                                            <i class="fa-solid fa-clock"></i>
+                                        </div>
+                                        <div>
+                                            <small class="text-white-50">Hours</small>
+                                            <p class="mb-0">24/7 Support</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="social-links mt-5">
+                                    <p class="text-white-50 mb-3">Follow Us</p>
+                                    <a href="https://www.instagram.com/mr_prince.62" target="_blank" class="social-btn">
+                                        <i class="fa-brands fa-instagram"></i>
+                                    </a>
+                                    <a href="https://www.linkedin.com/in/prince-kumar-354a" target="_blank" class="social-btn">
+                                        <i class="fa-brands fa-linkedin-in"></i>
+                                    </a>
+                                    <a href="https://www.facebook.com/princekumar2526" target="_blank" class="social-btn">
+                                        <i class="fa-brands fa-facebook-f"></i>
+                                    </a>
+                                    <a href="https://twitter.com/princek79253542" target="_blank" class="social-btn">
+                                        <i class="fa-brands fa-twitter"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Contact Form Side -->
+                        <div class="col-lg-7 form-side">
+                            <div class="p-5">
+                                <h3 class="mb-4 text-gradient">Send us a Message</h3>
+                                <p class="text-muted mb-4">Fill out the form below and we'll get back to you as soon as possible.</p>
+
+                                <form action="/contact" method="POST" class="needs-validation" novalidate>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">First Name</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
+                                                <input type="text" class="form-control" name="firstName" placeholder="Your first name" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Last Name</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
+                                                <input type="text" class="form-control" name="lastName" placeholder="Your last name" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label">Email Address</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
+                                            <input type="email" class="form-control" name="email" placeholder="your.email@example.com" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label">Phone Number</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="fa-solid fa-phone"></i></span>
+                                            <input type="tel" class="form-control" name="phone" placeholder="+91 1234567890">
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label">Subject</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="fa-solid fa-tag"></i></span>
+                                            <select class="form-select" name="subject" required>
+                                                <option value="">Select a subject</option>
+                                                <option value="booking">Booking Inquiry</option>
+                                                <option value="listing">Listing Question</option>
+                                                <option value="support">Technical Support</option>
+                                                <option value="feedback">Feedback</option>
+                                                <option value="other">Other</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label class="form-label">Message</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="fa-solid fa-message"></i></span>
+                                            <textarea class="form-control" name="message" rows="4" placeholder="How can we help you?" required></textarea>
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary btn-lg w-100">
+                                        <i class="fa-solid fa-paper-plane me-2"></i>Send Message
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .text-gradient {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    .contact-info-side {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    
+    .contact-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    
+    .icon-box {
+        width: 45px;
+        height: 45px;
+        background: rgba(255,255,255,0.2);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        flex-shrink: 0;
+    }
+    
+    .social-btn {
+        width: 40px;
+        height: 40px;
+        background: rgba(255,255,255,0.2);
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        text-decoration: none;
+        margin-right: 10px;
+        transition: all 0.3s;
+    }
+    
+    .social-btn:hover {
+        background: white;
+        color: #667eea;
+        transform: translateY(-3px);
+    }
+    
+    .form-side {
+        background: #fff;
+    }
+    
+    .input-group-text {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+    }
+    
+    .form-control, .form-select {
+        border: 1px solid #e2e8f0;
+        padding: 0.75rem;
+    }
+    
+    .form-control:focus, .form-select:focus {
+        border-color: #667eea;
+        box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+    }
+    
+    .btn-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+        padding: 0.8rem;
+        font-weight: 600;
+    }
+    
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    }
+</style>
+
+<script>
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            var forms = document.getElementsByClassName('needs-validation');
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>

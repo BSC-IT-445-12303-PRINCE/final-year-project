@@ -1,0 +1,224 @@
+<% layout("./listing/layouts/boilerplate") %>
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-lg border-0">
+                <div class="card-body p-5">
+                    <div class="text-center mb-4">
+                        <div class="help-icon mb-3">
+                            <i class="fa-solid fa-headset"></i>
+                        </div>
+                        <h1 class="text-gradient">Help Center</h1>
+                        <p class="text-muted">We're here to help you with any questions or issues</p>
+                    </div>
+
+                    <div class="row g-4 mb-5">
+                        <!-- Quick Contact Card -->
+                        <div class="col-md-6">
+                            <div class="contact-card h-100">
+                                <div class="card-body text-center p-4">
+                                    <div class="icon-circle mb-3">
+                                        <i class="fa-solid fa-phone"></i>
+                                    </div>
+                                    <h5 class="card-title">Call Us</h5>
+                                    <p class="card-text">
+                                        <a href="tel:+918252676827" class="phone-link">+91 8252676827</a>
+                                    </p>
+                                    <small class="text-muted">Available 24/7</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="contact-card h-100">
+                                <div class="card-body text-center p-4">
+                                    <div class="icon-circle mb-3">
+                                        <i class="fa-solid fa-envelope"></i>
+                                    </div>
+                                    <h5 class="card-title">Email Us</h5>
+                                    <p class="card-text">
+                                        <a href="mailto:princekumar46399@gmail.com">princekumar46399@gmail.com</a>
+                                    </p>
+                                    <small class="text-muted">Response within 24 hours</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Section -->
+                    <h4 class="mb-4 text-center">Frequently Asked Questions</h4>
+
+                    <div class="accordion" id="helpAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                                    <i class="fa-solid fa-circle-question me-2 text-primary"></i>
+                                    How do I create a new listing?
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#helpAccordion">
+                                <div class="accordion-body">
+                                    To create a new listing, click on "Add Listing" in the navbar. Fill in the property details including title, description, price, location, and upload photos. Make sure to select the appropriate category for your property.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                                    <i class="fa-solid fa-circle-question me-2 text-primary"></i>
+                                    How do I book a property?
+                                </button>
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#helpAccordion">
+                                <div class="accordion-body">
+                                    Browse listings on the Explore page, click on any property to view details, and use the booking form to make a reservation. You'll need to be logged in to complete a booking.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                                    <i class="fa-solid fa-circle-question me-2 text-primary"></i>
+                                    What is the cancellation policy?
+                                </button>
+                            </h2>
+                            <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#helpAccordion">
+                                <div class="accordion-body">
+                                    Cancellation policies vary by host. Please check the specific listing's cancellation policy before booking. Generally, cancellations made 48 hours before check-in are eligible for a full refund.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour">
+                                    <i class="fa-solid fa-circle-question me-2 text-primary"></i>
+                                    How do I contact the host?
+                                </button>
+                            </h2>
+                            <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#helpAccordion">
+                                <div class="accordion-body">
+                                    You can contact the host through the messaging feature on the listing page. Click "Contact Host" and send your inquiry. The host will respond to your message.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive">
+                                    <i class="fa-solid fa-circle-question me-2 text-primary"></i>
+                                    Is my payment information secure?
+                                </button>
+                            </h2>
+                            <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#helpAccordion">
+                                <div class="accordion-body">
+                                    Yes! We use industry-standard encryption and secure payment processors to protect your financial information. Your payment details are never stored on our servers.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact CTA -->
+                    <div class="text-center mt-5 p-4 bg-light rounded">
+                        <h5>Still need help?</h5>
+                        <p class="text-muted mb-3">Our support team is ready to assist you</p>
+                        <a href="/contact" class="btn btn-primary btn-lg">
+                            <i class="fa-solid fa-paper-plane me-2"></i>Contact Us
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .text-gradient {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    .help-icon {
+        font-size: 4rem;
+        color: #667eea;
+    }
+    
+    .contact-card {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        border-radius: 15px;
+        transition: transform 0.3s;
+        border: none;
+    }
+    
+    .contact-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    
+    .icon-circle {
+        width: 70px;
+        height: 70px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        font-size: 1.8rem;
+        color: white;
+    }
+    
+    .phone-link {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #667eea;
+        text-decoration: none;
+    }
+    
+    .phone-link:hover {
+        color: #764ba2;
+    }
+    
+    .accordion-item {
+        border: none;
+        margin-bottom: 10px;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+    
+    .accordion-button {
+        background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+        font-weight: 500;
+        padding: 1.2rem;
+    }
+    
+    .accordion-button:not(.collapsed) {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+    }
+    
+    .accordion-button:not(.collapsed) .text-primary {
+        color: white !important;
+    }
+    
+    .accordion-body {
+        background: #f8f9fa;
+        padding: 1.5rem;
+        line-height: 1.7;
+    }
+    
+    .btn-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+    }
+    
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    }
+</style>

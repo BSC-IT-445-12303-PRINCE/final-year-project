@@ -64,3 +64,11 @@ module.exports.isReviewAuthor = async (req, res, next) => {
 
     next();
 };
+
+module.exports.isAdmin = (req, res, next) => {
+    if (!req.session.adminId) {
+        req.flash("error", "Admin access required");
+        return res.redirect("/admin/login");
+    }
+    next();
+};

@@ -1,59 +1,120 @@
 <style>
+  /* Modern Navbar Styling */
+  .navbar {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    padding: 0.8rem 0;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  }
 
-  .search-btn{
-    background-color: #fe424d;
-    color: #fff;
+  .navbar-brand {
+    color: white !important;
+    font-size: 1.8rem;
+    font-weight: 700;
+    transition: transform 0.3s;
+  }
+
+  .navbar-brand:hover {
+    transform: scale(1.05);
+  }
+
+  .nav-link {
+    color: rgba(255,255,255,0.9) !important;
+    font-weight: 500;
+    padding: 0.5rem 1rem !important;
     border-radius: 25px;
-    padding: 0 1rem 0 1rem;
+    transition: all 0.3s;
+    margin: 0 0.2rem;
   }
 
-  .search-btn:hover{
-    background-color: #fe424d;
-    color: #fff;
+  .nav-link:hover {
+    background: rgba(255,255,255,0.15);
+    color: white !important;
   }
 
-  .search-btn i{
-    display: inline;
-    margin-right: 0.5rem;
-  }
-  
-  .search-inp{
+  .search-btn {
+    background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+    color: white;
+    border: none;
     border-radius: 25px;
-    padding: 0.5rem 3rem 0.5rem 3rem;
-    font-size: 1rem;
+    padding: 0.6rem 1.5rem;
+    font-weight: 600;
+    transition: all 0.3s;
   }
 
+  .search-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(238, 90, 36, 0.4);
+  }
+
+  .search-inp {
+    border-radius: 25px;
+    padding: 0.6rem 1.5rem;
+    border: 2px solid rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.1);
+    color: white;
+  }
+
+  .search-inp::placeholder {
+    color: rgba(255,255,255,0.7);
+  }
+
+  .search-inp:focus {
+    background: rgba(255,255,255,0.2);
+    border-color: white;
+    color: white;
+    box-shadow: none;
+  }
+
+  .admin-badge {
+    background: linear-gradient(45deg, #ff6b6b, #feca57);
+    color: white;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-left: 0.5rem;
+  }
+
+  .navbar-toggler {
+    border: 2px solid rgba(255,255,255,0.5);
+  }
+
+  .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.9%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+  }
 </style>
 
-
-<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
+<nav class="navbar navbar-expand-md sticky-top">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/listings"><i class="fa-regular fa-compass"></i></a>
-    <button class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse" 
-        data-bs-target="#navbarNavAltMarkup"
-    >
+    <a class="navbar-brand" href="/listings">
+      <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800;">
+        <span style="color: #FFD700;">🧳</span>Travel<span style="color: #FFD700;">Sathi</span>
+      </span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link" href="/listings">Explore</a>
+        <a class="nav-link" href="/listings"><i class="fa-solid fa-globe me-1"></i> Explore</a>
+        <a class="nav-link" href="/listings/new"><i class="fa-solid fa-plus me-1"></i> Add Listing</a>
       </div>
       <div class="navbar-nav ms-auto">
         <form class="d-flex" role="search" action="/listings" method="GET">
           <input class="form-control me-2 search-inp" type="search" name="search" placeholder="Search destinations"/>
-          <button class="btn search-btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
+          <button class="btn search-btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
         </form>
       </div>
       <div class="navbar-nav ms-auto">
-         <a class="nav-link" href="/listings/new">Airbnb your home</a>
+        <!-- Admin Panel Link -->
+        <a class="nav-link" href="/admin/login"><span class="admin-badge"><i class="fa-solid fa-shield-halved me-1"></i>Admin</span></a>
+        
         <% if(!currUser) { %>
-        <a class="nav-link" href="/singup"><b>Sign up</b></a>
-        <a class="nav-link" href="/login"><b>Log in</b></a> 
+          <a class="nav-link" href="/singup"><i class="fa-solid fa-user-plus me-1"></i> Sign up</a>
+          <a class="nav-link" href="/login"><i class="fa-solid fa-right-to-bracket me-1"></i> Log in</a> 
         <% } %>
-         <% if(currUser) { %>
-        <a class="nav-link" href="/logout"><b>Log out</b></a>
+        <% if(currUser) { %>
+          <a class="nav-link" href="/logout"><i class="fa-solid fa-right-from-bracket me-1"></i> Log out</a>
         <% } %>
       </div>
     </div>
