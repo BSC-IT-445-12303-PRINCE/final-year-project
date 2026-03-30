@@ -12,14 +12,23 @@ console.log('Email Config:', {
 });
 
 const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: false,
+    requireTLS: true,
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS
     },
     tls: {
         rejectUnauthorized: false
-    }
+    },
+    pool: false,
+    maxConnections: 1,
+    maxMessages: 1,
+    connectionTimeout: 10000,
+    greetingTimeout: 5000,
+    socketTimeout: 10000
 });
 
 // Verify transporter configuration
@@ -32,32 +41,40 @@ transporter.verify(function(error, success) {
     }
 });
 
-const sendOTPEmail = async (email, otp) => {
+const sendOTPEmail = async (email, otp, retries = 3) => {
     try {
         console.log('Attempting to send OTP to:', email);
         
         const mailOptions = {
-            from: `"Admin" <${process.env.EMAIL_USER}>`,
+            from: `"TravelSathi Admin" <${process.env.EMAIL_USER}>`,
             to: email,
-            subject: 'Admin Login OTP',
+            subject: 'Admin Login OTP - TravelSathi',
             html: `
-                <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-                    <h2 style="color: #333;">Admin Login OTP</h2>
-                    <p>Your OTP for admin login is:</p>
-                    <div style="background-color: #f4f4f4; padding: 20px; text-align: center; margin: 20px 0;">
-                        <span style="font-size: 24px; font-weight: bold; color: #007bff;">${otp}</span>
+                <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+                    <h2 style="color: #333; border-bottom: 2px solid #007bff; padding-bottom: 10px;">Admin Login OTP</h2>
+                    <p style="font-size: 16px; color: #555;">Your OTP for admin login is:</p>
+                    <div style="background-color: #f8f9fa; padding: 20px; text-align: center; margin: 20px 0; border-radius: 8px; border: 2px solid #007bff;">
+                        <span style="font-size: 32px; font-weight: bold; color: #007bff; letter-spacing: 5px;">${otp}</span>
                     </div>
-                    <p>This OTP will expire in 10 minutes.</p>
-                    <p style="color: #666; font-size: 14px;">If you didn't request this OTP, please ignore this email.</p>
+                    <p style="color: #666; font-size: 14px;">This OTP will expire in 10 minutes.</p>
+                    <p style="color: #999; font-size: 12px; margin-top: 30px;">If you didn't request this OTP, please ignore this email.</p>
                 </div>
             `
         };
 
         const info = await transporter.sendMail(mailOptions);
-        console.log('OTP email sent successfully:', info.messageId);
+        console.log('✅ OTP email sent successfully:', info.messageId);
         return true;
+        
     } catch (error) {
-        console.error('Error sending OTP email:', error.message);
+        console.error('❌ Error sending OTP email:', error.message);
+        
+        if (retries > 0 && (error.code === 'ESOCKET' || error.code === 'ECONNRESET' || error.code === 'ETIMEDOUT')) {
+            console.log(`Retrying... ${retries} attempts left`);
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            return sendOTPEmail(email, otp, retries - 1);
+        }
+        
         console.error('Full error:', error);
         return false;
     }
