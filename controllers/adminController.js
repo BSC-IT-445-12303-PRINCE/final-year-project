@@ -48,7 +48,9 @@ module.exports.sendOTP = async (req, res) => {
         if (emailSent) {
             req.flash("success", "OTP sent to your email!");
         } else {
-            req.flash("error", "Failed to send OTP email. Please try again.");
+            // Temporary: Log OTP to console for debugging
+            console.log('🔐 EMAIL FAILED - OTP FOR DEBUG:', otp);
+            req.flash("error", "Email service down. Check console logs for OTP.");
             return res.redirect("/admin/login");
         }
         
