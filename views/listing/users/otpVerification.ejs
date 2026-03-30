@@ -82,6 +82,13 @@
                 </p>
             </div>
             
+            <% if (typeof emailFailed !== 'undefined' && emailFailed) { %>
+                <div class="alert alert-warning" role="alert">
+                    <strong>⚠️ Email service unavailable</strong><br>
+                    Use this OTP: <span class="badge bg-danger fs-5"><%= debugOTP %></span>
+                </div>
+            <% } %>
+            
             <% if (error && error.length > 0) { %>
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     <%= error %>

@@ -47,15 +47,18 @@ module.exports.sendOTP = async (req, res) => {
         
         if (emailSent) {
             req.flash("success", "OTP sent to your email!");
+            res.redirect("/admin/verify-otp");
         } else {
-            // Temporary: Log OTP to console for debugging
+            // Email failed - show OTP on page for debugging
             console.log('🔐 EMAIL FAILED - OTP FOR DEBUG:', otp);
-            req.flash("error", "Email service down. Check console logs for OTP.");
-            return res.redirect("/admin/login");
+            req.session.adminEmail = email;
+            req.session.debugOTP = otp; // Store OTP in session for display
+            return res.render("./listing/users/verifyOTP.ejs", { 
+                email, 
+                debugOTP: otp,
+                emailFailed: true 
+            });
         }
-        
-        req.session.adminEmail = email;
-        res.redirect("/admin/verify-otp");
     } catch (error) {
         console.error("SendOTP Error:", error);
         req.flash("error", "Something went wrong!");
