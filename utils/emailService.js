@@ -1,9 +1,14 @@
 const nodemailer = require('nodemailer');
 
+// Load environment variables if not already loaded
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config();
+}
+
 // Debug: Check if env variables are loaded
 console.log('Email Config:', {
-    user: process.env.EMAIL_USER ? 'Set' : 'Not Set',
-    pass: process.env.EMAIL_PASS ? 'Set' : 'Not Set'
+    user: process.env.EMAIL_USER ? 'Set (' + process.env.EMAIL_USER.substring(0, 5) + '...)' : 'Not Set',
+    pass: process.env.EMAIL_PASS ? 'Set (' + process.env.EMAIL_PASS.substring(0, 3) + '...)' : 'Not Set'
 });
 
 const transporter = nodemailer.createTransport({
@@ -20,7 +25,8 @@ const transporter = nodemailer.createTransport({
 // Verify transporter configuration
 transporter.verify(function(error, success) {
     if (error) {
-        console.error('Transporter verification failed:', error);
+        console.error('Transporter verification failed:', error.message);
+        console.error('Please check your EMAIL_USER and EMAIL_PASS in .env file');
     } else {
         console.log('Transporter is ready to send emails');
     }

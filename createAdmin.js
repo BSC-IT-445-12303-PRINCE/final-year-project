@@ -9,7 +9,7 @@ async function createAdmin() {
     await mongoose.connect(process.env.ATLASDB_URL);
     console.log("✅ Connected to database");
 
-    const email = process.env.ADMIN_EMAIL;
+    const email = process.env.ADMIN_USER;
     const password = process.env.ADMIN_PASSWORD;
 
     if (!email || !password) {
