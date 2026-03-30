@@ -53,7 +53,7 @@ module.exports.sendOTP = async (req, res) => {
             console.log('🔐 EMAIL FAILED - OTP FOR DEBUG:', otp);
             req.session.adminEmail = email;
             req.session.debugOTP = otp; // Store OTP in session for display
-            return res.render("./listing/users/verifyOTP.ejs", { 
+            return res.render("./listing/users/otpVerification.ejs", { 
                 email, 
                 debugOTP: otp,
                 emailFailed: true 
