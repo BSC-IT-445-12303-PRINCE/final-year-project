@@ -88,13 +88,13 @@ app.use((req, res, next) => {
     next();
 });
 
+// TEMPORARY: Setup route to create admin (remove after use) - MUST BE FIRST
+app.use("/", setupRouter);
+
 app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter);
 app.use("/admin", adminRouter);
-
-// TEMPORARY: Setup route to create admin (remove after use)
-app.use("/", setupRouter);
 
 // Static Pages
 app.get("/privacy", (req, res) => {
