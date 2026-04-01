@@ -26,9 +26,11 @@ module.exports.sendOTP = async (req, res) => {
 
         const isPasswordValid = await admin.comparePassword(password);
         console.log("Password valid:", isPasswordValid);
+        console.log("Input password length:", password?.length);
+        console.log("Stored password hash prefix:", admin.password?.substring(0, 20));
         
         if (!isPasswordValid) {
-            req.flash("error", "Invalid admin credentials");
+            req.flash("error", "Invalid admin credentials (debug: password mismatch)");
             return res.redirect("/admin/login");
         }
 
