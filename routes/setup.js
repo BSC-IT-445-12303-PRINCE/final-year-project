@@ -6,24 +6,25 @@ const router = express.Router();
 const Admin = require('../models/admin');
 const bcrypt = require('bcrypt');
 
-// GET /setup-admin - Create admin (run once, then delete this route)
+// GET /setup-admin - Create or reset admin
 router.get('/setup-admin', async (req, res) => {
     try {
-        const email = process.env.ADMIN_EMAIL || 'princekumar46399@gmail.com';
-        const password = process.env.ADMIN_PASSWORD || 'admin123456';
+        const email = process.env.ADMIN_EMAIL;
+        const password = process.env.ADMIN_PASSWORD;
         
-        // Check if exists
+        // Check if exists and delete
         const existing = await Admin.findOne({ email });
         if (existing) {
-            return res.send('Admin already exists! Login at /admin/login');
+            await Admin.deleteOne({ email });
+            console.log('Deleted existing admin');
         }
         
-        // Create admin
+        // Create fresh admin
         const hashedPassword = await bcrypt.hash(password, 10);
         const admin = new Admin({ email, password: hashedPassword });
         await admin.save();
         
-        res.send(`✅ Admin created! Email: ${email}<br>Delete this route after use!`);
+        res.send(`✅ Admin reset! Email: ${email}<br>Password: ${password}<br>Login at /admin/login`);
         
     } catch (error) {
         res.status(500).send('Error: ' + error.message);
