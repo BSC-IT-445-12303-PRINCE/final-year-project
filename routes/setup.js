@@ -19,9 +19,8 @@ router.get('/setup-admin', async (req, res) => {
             console.log('Deleted existing admin');
         }
         
-        // Create fresh admin
-        const hashedPassword = await bcrypt.hash(password, 10);
-        const admin = new Admin({ email, password: hashedPassword });
+        // Create fresh admin (password will be auto-hashed by model's pre('save') hook)
+        const admin = new Admin({ email, password });
         await admin.save();
         
         res.send(`✅ Admin reset! Email: ${email}<br>Password: ${password}<br>Login at /admin/login`);
