@@ -23,6 +23,7 @@ const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
 const adminRouter = require("./routes/admin.js");
+const setupRouter = require("./routes/setup.js");
 const listingController = require("./controllers/listing.js");
 
 const dbUrl = process.env.ATLASDB_URL;
@@ -107,6 +108,8 @@ app.use((req, res, next) => {
 //     // res.send(registeredUser);
 // });
 
+
+app.use("/", setupRouter); // TEMPORARY: Setup route to create admin
 
 app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
