@@ -1,18 +1,18 @@
 /* ============================================
-   STAYNEST - YOUR PERFECT STAY AWAITS
+   AIRCLONE - VACATION RENTALS & EXPERIENCES
    ============================================ */
 
 /* CSS Variables for consistent theming */
 :root {
-  --primary-gradient: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%);
-  --secondary-gradient: linear-gradient(45deg, #FF6B6B, #FF8E53);
-  --accent-gradient: linear-gradient(45deg, #4ECDC4, #44A08D);
-  --success-gradient: linear-gradient(45deg, #11998e, #38ef7d);
-  --warning-gradient: linear-gradient(45deg, #f093fb, #f5576c);
+  --primary-gradient: linear-gradient(135deg, #FF5A5F 0%, #00A699 100%);
+  --secondary-gradient: linear-gradient(45deg, #FF5A5F, #FC642D);
+  --accent-gradient: linear-gradient(45deg, #00A699, #008489);
+  --success-gradient: linear-gradient(45deg, #00A699, #008489);
+  --warning-gradient: linear-gradient(45deg, #FFB400, #FF5A5F);
   
-  --primary-color: #FF6B6B;
-  --secondary-color: #4ECDC4;
-  --accent-color: #FF8E53;
+  --primary-color: #FF5A5F;
+  --secondary-color: #00A699;
+  --accent-color: #FC642D;
   --text-dark: #2d3748;
   --text-muted: #718096;
   --bg-light: #f7fafc;
