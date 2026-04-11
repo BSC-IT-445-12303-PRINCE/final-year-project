@@ -1,18 +1,18 @@
 /* ============================================
-   MODERN WANDERLUST - FRESH STYLING 2024
+   STAYNEST - YOUR PERFECT STAY AWAITS
    ============================================ */
 
 /* CSS Variables for consistent theming */
 :root {
-  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  --secondary-gradient: linear-gradient(45deg, #ff6b6b, #ee5a24);
-  --accent-gradient: linear-gradient(45deg, #f093fb, #f5576c);
-  --success-gradient: linear-gradient(45deg, #4facfe, #00f2fe);
-  --warning-gradient: linear-gradient(45deg, #fa709a, #fee140);
+  --primary-gradient: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%);
+  --secondary-gradient: linear-gradient(45deg, #FF6B6B, #FF8E53);
+  --accent-gradient: linear-gradient(45deg, #4ECDC4, #44A08D);
+  --success-gradient: linear-gradient(45deg, #11998e, #38ef7d);
+  --warning-gradient: linear-gradient(45deg, #f093fb, #f5576c);
   
-  --primary-color: #667eea;
-  --secondary-color: #764ba2;
-  --accent-color: #ff6b6b;
+  --primary-color: #FF6B6B;
+  --secondary-color: #4ECDC4;
+  --accent-color: #FF8E53;
   --text-dark: #2d3748;
   --text-muted: #718096;
   --bg-light: #f7fafc;

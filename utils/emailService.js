@@ -46,9 +46,9 @@ const sendOTPEmail = async (email, otp, retries = 3) => {
         console.log('Attempting to send OTP to:', email);
         
         const mailOptions = {
-            from: `"TravelSathi Admin" <${process.env.EMAIL_USER}>`,
+            from: `"StayNest Admin" <${process.env.EMAIL_USER}>`,
             to: email,
-            subject: 'Admin Login OTP - TravelSathi',
+            subject: 'Admin Login OTP - StayNest',
             html: `
                 <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
                     <h2 style="color: #333; border-bottom: 2px solid #007bff; padding-bottom: 10px;">Admin Login OTP</h2>
