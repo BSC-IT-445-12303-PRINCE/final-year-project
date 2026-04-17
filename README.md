@@ -1,17 +1,24 @@
 # TravelSathi - Final Year Project
 
 ## 📌 Project Description
-TravelSathi is a web-based application similar to Airbnb where users can explore, create, and manage travel listings. Users can also add reviews and ratings.
+TravelSathi is a web-based application similar to Airbnb where users can explore, create, and manage travel listings. It also includes an admin panel for managing users and listings.
 
 ## 🚀 Live Demo
 👉 https://final-year-project-em2c.onrender.com/login
 
-## 🚀 Features
+## 🔑 Features
+### 👤 User Features
 - User Authentication (Login & Signup)
 - Add, Edit, Delete Listings
 - Upload Images
 - Review & Rating System
 - Search and Filter Listings
+
+### 🛠 Admin Panel
+- Admin Login
+- Manage All Listings
+- Delete Any Listing
+- Monitor Users and Reviews
 
 ## 🛠 Tech Stack
 - Node.js
@@ -33,6 +40,3 @@ TravelSathi is a web-based application similar to Airbnb where users can explore
 ## 👨‍💻 Author
 Prince Kumar  
 BSc IT Final Year
-
-
-
