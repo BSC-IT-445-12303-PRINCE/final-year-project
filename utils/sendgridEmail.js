@@ -27,8 +27,8 @@ const sendOTPEmail = async (email, otp, retries = 3) => {
         
         const msg = {
             to: email,
-            from: process.env.SENDGRID_FROM_EMAIL || 'noreply@airclone.com',
-            subject: 'Admin Login OTP - Airclone',
+            from: process.env.SENDGRID_FROM_EMAIL || 'noreply@travelsathi.com',
+            subject: 'Admin Login OTP - TravelSathi',
             html: `
                 <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
                     <h2 style="color: #333; border-bottom: 2px solid #007bff; padding-bottom: 10px;">Admin Login OTP</h2>

@@ -1,18 +1,18 @@
 /* ============================================
-   AIRCLONE - VACATION RENTALS & EXPERIENCES
+   TRAVELSATHI - YOUR TRAVEL COMPANION
    ============================================ */
 
 /* CSS Variables for consistent theming */
 :root {
-  --primary-gradient: linear-gradient(135deg, #FF5A5F 0%, #00A699 100%);
-  --secondary-gradient: linear-gradient(45deg, #FF5A5F, #FC642D);
-  --accent-gradient: linear-gradient(45deg, #00A699, #008489);
-  --success-gradient: linear-gradient(45deg, #00A699, #008489);
-  --warning-gradient: linear-gradient(45deg, #FFB400, #FF5A5F);
+  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --secondary-gradient: linear-gradient(45deg, #ff6b6b, #ee5a24);
+  --accent-gradient: linear-gradient(45deg, #f093fb, #f5576c);
+  --success-gradient: linear-gradient(45deg, #4facfe, #00f2fe);
+  --warning-gradient: linear-gradient(45deg, #fa709a, #fee140);
   
-  --primary-color: #FF5A5F;
-  --secondary-color: #00A699;
-  --accent-color: #FC642D;
+  --primary-color: #667eea;
+  --secondary-color: #764ba2;
+  --accent-color: #ff6b6b;
   --text-dark: #2d3748;
   --text-muted: #718096;
   --bg-light: #f7fafc;
