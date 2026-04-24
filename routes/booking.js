@@ -13,6 +13,7 @@ router.post("/create/:id", isLoggedIn, wrapAsync(bookingController.createBooking
 
 // Payment page
 router.get("/:id/payment", isLoggedIn, wrapAsync(bookingController.showPaymentPage));
+router.post("/:id/payment/process", isLoggedIn, wrapAsync(bookingController.processPayment));
 
 // Cancel booking
 router.post("/:id/cancel", isLoggedIn, wrapAsync(bookingController.cancelBooking));

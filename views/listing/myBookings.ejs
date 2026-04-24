@@ -68,6 +68,12 @@
                                 <div>
                                     <span class="text-muted">Total:</span>
                                     <strong class="text-primary h5">₹<%= booking.totalPrice.toLocaleString() %></strong>
+                                    <% if (booking.payment.method) { %>
+                                        <br><small class="text-muted">
+                                            <i class="fas fa-<%= booking.payment.method === 'card' ? 'credit-card' : booking.payment.method === 'upi' ? 'mobile-alt' : 'money-bill-wave' %> me-1"></i>
+                                            <%= booking.payment.method.toUpperCase() %>
+                                        </small>
+                                    <% } %>
                                 </div>
                                 <span class="badge 
                                     <%= booking.payment.status === 'paid' ? 'bg-success' : 'bg-secondary' %>">

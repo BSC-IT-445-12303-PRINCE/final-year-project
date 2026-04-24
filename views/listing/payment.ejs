@@ -33,42 +33,101 @@
                         <strong>Payment Status:</strong> <%= booking.payment.status.toUpperCase() %>
                     </div>
 
-                    <!-- Demo Payment Form -->
-                    <form action="/bookings/<%= booking._id %>/payment/process" method="POST">
+                    <!-- Payment Method Tabs -->
+                    <form action="/bookings/<%= booking._id %>/payment/process" method="POST" id="paymentForm">
+                        <!-- Payment Method Selection -->
                         <div class="mb-3">
-                            <label class="form-label fw-bold">Card Number</label>
-                            <div class="input-group">
-                                <span class="input-group-text"><i class="fas fa-credit-card"></i></span>
-                                <input type="text" class="form-control" placeholder="4242 4242 4242 4242" maxlength="19">
+                            <label class="form-label fw-bold">Select Payment Method</label>
+                            <div class="row g-2">
+                                <div class="col-4">
+                                    <input type="radio" class="btn-check" name="paymentMethod" id="card" value="card" checked onchange="showPaymentForm('card')">
+                                    <label class="btn btn-outline-primary w-100" for="card">
+                                        <i class="fas fa-credit-card d-block mb-1"></i>
+                                        <small>Card</small>
+                                    </label>
+                                </div>
+                                <div class="col-4">
+                                    <input type="radio" class="btn-check" name="paymentMethod" id="upi" value="upi" onchange="showPaymentForm('upi')">
+                                    <label class="btn btn-outline-success w-100" for="upi">
+                                        <i class="fas fa-mobile-alt d-block mb-1"></i>
+                                        <small>UPI</small>
+                                    </label>
+                                </div>
+                                <div class="col-4">
+                                    <input type="radio" class="btn-check" name="paymentMethod" id="cash" value="cash" onchange="showPaymentForm('cash')">
+                                    <label class="btn btn-outline-warning w-100" for="cash">
+                                        <i class="fas fa-money-bill-wave d-block mb-1"></i>
+                                        <small>Cash</small>
+                                    </label>
+                                </div>
                             </div>
-                            <small class="text-muted">Demo: Use any 16-digit number</small>
                         </div>
 
-                        <div class="row mb-3">
-                            <div class="col-6">
-                                <label class="form-label fw-bold">Expiry Date</label>
-                                <input type="text" class="form-control" placeholder="MM/YY" maxlength="5">
+                        <!-- Card Payment Form -->
+                        <div id="cardForm">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Card Number</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-credit-card"></i></span>
+                                    <input type="text" class="form-control" name="cardNumber" placeholder="4242 4242 4242 4242" maxlength="19">
+                                </div>
+                                <small class="text-muted">Demo: Use any 16-digit number</small>
                             </div>
-                            <div class="col-6">
-                                <label class="form-label fw-bold">CVV</label>
-                                <input type="text" class="form-control" placeholder="123" maxlength="3">
+
+                            <div class="row mb-3">
+                                <div class="col-6">
+                                    <label class="form-label fw-bold">Expiry Date</label>
+                                    <input type="text" class="form-control" name="expiry" placeholder="MM/YY" maxlength="5">
+                                </div>
+                                <div class="col-6">
+                                    <label class="form-label fw-bold">CVV</label>
+                                    <input type="text" class="form-control" name="cvv" placeholder="123" maxlength="3">
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Cardholder Name</label>
+                                <input type="text" class="form-control" name="cardName" placeholder="Name on card">
                             </div>
                         </div>
 
-                        <div class="mb-3">
-                            <label class="form-label fw-bold">Cardholder Name</label>
-                            <input type="text" class="form-control" placeholder="Name on card">
+                        <!-- UPI Payment Form -->
+                        <div id="upiForm" style="display: none;">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">UPI ID</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-mobile-alt"></i></span>
+                                    <input type="text" class="form-control" name="upiId" placeholder="yourname@upi" id="upiIdInput">
+                                </div>
+                                <small class="text-muted">Enter your UPI ID (e.g., name@paytm, name@okaxis)</small>
+                            </div>
+                            <div class="alert alert-success">
+                                <i class="fas fa-info-circle me-2"></i>
+                                You will receive a payment request on your UPI app. Please approve it to complete the booking.
+                            </div>
                         </div>
 
-                        <div class="d-grid">
-                            <button type="submit" class="btn btn-success btn-lg">
+                        <!-- Cash Payment Form -->
+                        <div id="cashForm" style="display: none;">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Payment Notes (Optional)</label>
+                                <textarea class="form-control" name="cashNotes" rows="2" placeholder="Any notes about cash payment..."></textarea>
+                            </div>
+                            <div class="alert alert-warning">
+                                <i class="fas fa-hand-holding-usd me-2"></i>
+                                <strong>Cash Payment:</strong> Please pay ₹<%= booking.totalPrice.toLocaleString() %> at the property during check-in. Admin will verify your payment.
+                            </div>
+                        </div>
+
+                        <div class="d-grid mt-4">
+                            <button type="submit" class="btn btn-success btn-lg" id="payButton">
                                 <i class="fas fa-lock me-2"></i>Pay ₹<%= booking.totalPrice.toLocaleString() %>
                             </button>
                         </div>
 
                         <div class="text-center mt-3">
                             <small class="text-muted">
-                                <i class="fas fa-shield-alt me-1"></i>Secure SSL Encrypted Transaction
+                                <i class="fas fa-shield-alt me-1"></i>Secure Payment Processing
                             </small>
                         </div>
                     </form>
@@ -85,3 +144,25 @@
         </div>
     </div>
 </div>
+
+<script>
+    function showPaymentForm(method) {
+        // Hide all forms
+        document.getElementById('cardForm').style.display = 'none';
+        document.getElementById('upiForm').style.display = 'none';
+        document.getElementById('cashForm').style.display = 'none';
+        
+        // Show selected form
+        document.getElementById(method + 'Form').style.display = 'block';
+        
+        // Update button text
+        const button = document.getElementById('payButton');
+        if (method === 'cash') {
+            button.innerHTML = '<i class="fas fa-check me-2"></i>Confirm Cash Payment';
+        } else if (method === 'upi') {
+            button.innerHTML = '<i class="fas fa-mobile-alt me-2"></i>Request UPI Payment';
+        } else {
+            button.innerHTML = '<i class="fas fa-lock me-2"></i>Pay ₹<%= booking.totalPrice.toLocaleString() %>';
+        }
+    }
+</script>

@@ -95,6 +95,49 @@ module.exports.showPaymentPage = async (req, res) => {
     }
 };
 
+// Process Payment (Card/Cash/UPI)
+module.exports.processPayment = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { paymentMethod, upiId, cashNotes } = req.body;
+        
+        const booking = await Booking.findById(id);
+        
+        if (!booking) {
+            req.flash("error", "Booking not found");
+            return res.redirect("/bookings/my");
+        }
+        
+        // Check if booking belongs to current user
+        if (!booking.user.equals(req.user._id)) {
+            req.flash("error", "Unauthorized access");
+            return res.redirect("/bookings/my");
+        }
+        
+        // Update payment based on method
+        booking.payment.status = "pending"; // Will be confirmed by admin
+        booking.payment.method = paymentMethod;
+        
+        if (paymentMethod === "upi") {
+            booking.payment.upiId = upiId;
+            booking.payment.notes = `UPI Payment from ${upiId}`;
+        } else if (paymentMethod === "cash") {
+            booking.payment.notes = cashNotes || "Cash payment at check-in";
+        } else if (paymentMethod === "card") {
+            booking.payment.notes = "Card payment - awaiting confirmation";
+        }
+        
+        await booking.save();
+        
+        req.flash("success", `Payment request submitted via ${paymentMethod.toUpperCase()}. Admin will verify shortly.`);
+        res.redirect("/bookings/my");
+    } catch (error) {
+        console.error("Error processing payment:", error);
+        req.flash("error", "Failed to process payment");
+        res.redirect(`/bookings/${id}/payment`);
+    }
+};
+
 // Get user's bookings
 module.exports.getUserBookings = async (req, res) => {
     try {

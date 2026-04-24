@@ -160,6 +160,22 @@
 
                     <hr>
 
+                    <!-- Payment Info -->
+                    <div class="mb-4">
+                        <strong>Payment Method:</strong><br>
+                        <span class="badge bg-info text-dark" style="font-size: 0.9rem; padding: 0.4rem 0.8rem;">
+                            <%= booking.payment.method ? booking.payment.method.toUpperCase() : 'Not Selected' %>
+                        </span>
+                        <% if (booking.payment.upiId) { %>
+                            <br><small class="text-muted">UPI ID: <%= booking.payment.upiId %></small>
+                        <% } %>
+                        <% if (booking.payment.notes) { %>
+                            <br><small class="text-muted">Notes: <%= booking.payment.notes %></small>
+                        <% } %>
+                    </div>
+
+                    <hr>
+
                     <!-- Payment Status -->
                     <div class="mb-4">
                         <strong>Payment Status:</strong><br>
