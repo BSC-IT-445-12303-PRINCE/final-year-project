@@ -21,6 +21,8 @@ router.delete("/users/:id", isAdmin, adminController.deleteUser);
 
 // ============== LISTINGS MANAGEMENT ==============
 router.get("/listings", isAdmin, adminController.getAllListings);
+router.get("/listings/new", isAdmin, adminController.renderNewListingForm);
+router.post("/listings", isAdmin, adminController.createListing);
 router.delete("/listings/:id", isAdmin, adminController.deleteListing);
 
 // ============== REVIEWS MANAGEMENT ==============

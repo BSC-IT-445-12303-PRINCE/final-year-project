@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Listing - Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .admin-form-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        .form-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 15px 15px 0 0;
+        }
+        .btn-admin {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            color: white;
+        }
+        .btn-admin:hover {
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="admin-form-card">
+                    <div class="form-header">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h3 class="mb-0"><i class="fas fa-plus-circle me-2"></i>Add New Listing</h3>
+                                <small>Create a new property listing for TravelSathi</small>
+                            </div>
+                            <a href="/admin/dashboard" class="btn btn-light btn-sm">
+                                <i class="fas fa-arrow-left me-1"></i>Back to Dashboard
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="p-4">
+                        <!-- Flash Messages -->
+                        <% if (error && error.length > 0) { %>
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <%= error %>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                        <% } %>
+                        
+                        <% if (success && success.length > 0) { %>
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <%= success %>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                        <% } %>
+
+                        <form action="/admin/listings" method="POST" class="needs-validation" novalidate>
+                            <!-- Title -->
+                            <div class="mb-3">
+                                <label for="title" class="form-label fw-bold">
+                                    <i class="fas fa-heading me-1 text-primary"></i>Title
+                                </label>
+                                <input type="text" name="title" id="title" class="form-control" placeholder="Enter property title" required>
+                                <div class="invalid-feedback">Please provide a title.</div>
+                            </div>
+
+                            <!-- Description -->
+                            <div class="mb-3">
+                                <label for="description" class="form-label fw-bold">
+                                    <i class="fas fa-align-left me-1 text-primary"></i>Description
+                                </label>
+                                <textarea name="description" id="description" class="form-control" rows="4" placeholder="Describe the property..." required></textarea>
+                                <div class="invalid-feedback">Please provide a description.</div>
+                            </div>
+
+                            <div class="row">
+                                <!-- Price -->
+                                <div class="col-md-6 mb-3">
+                                    <label for="price" class="form-label fw-bold">
+                                        <i class="fas fa-tag me-1 text-primary"></i>Price per Night (₹)
+                                    </label>
+                                    <input type="number" name="price" id="price" class="form-control" placeholder="1500" min="1" required>
+                                    <div class="invalid-feedback">Please provide a valid price.</div>
+                                </div>
+
+                                <!-- Category -->
+                                <div class="col-md-6 mb-3">
+                                    <label for="category" class="form-label fw-bold">
+                                        <i class="fas fa-list me-1 text-primary"></i>Category
+                                    </label>
+                                    <select name="category" id="category" class="form-select" required>
+                                        <option value="">Select Category</option>
+                                        <option value="trending">Trending</option>
+                                        <option value="rooms">Rooms</option>
+                                        <option value="iconic_cities">Iconic Cities</option>
+                                        <option value="mountains">Mountains</option>
+                                        <option value="castles">Castles</option>
+                                        <option value="amazing_pools">Amazing Pools</option>
+                                        <option value="camping">Camping</option>
+                                        <option value="farms">Farms</option>
+                                        <option value="arctic">Arctic</option>
+                                        <option value="domes">Domes</option>
+                                        <option value="boats">Boats</option>
+                                    </select>
+                                    <div class="invalid-feedback">Please select a category.</div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <!-- Location -->
+                                <div class="col-md-6 mb-3">
+                                    <label for="location" class="form-label fw-bold">
+                                        <i class="fas fa-map-marker-alt me-1 text-primary"></i>Location
+                                    </label>
+                                    <input type="text" name="location" id="location" class="form-control" placeholder="City, State" required>
+                                    <div class="invalid-feedback">Please provide a location.</div>
+                                </div>
+
+                                <!-- Country -->
+                                <div class="col-md-6 mb-3">
+                                    <label for="country" class="form-label fw-bold">
+                                        <i class="fas fa-globe me-1 text-primary"></i>Country
+                                    </label>
+                                    <input type="text" name="country" id="country" class="form-control" placeholder="Country" required>
+                                    <div class="invalid-feedback">Please provide a country.</div>
+                                </div>
+                            </div>
+
+                            <!-- Image URL -->
+                            <div class="mb-3">
+                                <label for="image" class="form-label fw-bold">
+                                    <i class="fas fa-image me-1 text-primary"></i>Image URL
+                                </label>
+                                <input type="url" name="image" id="image" class="form-control" placeholder="https://example.com/image.jpg">
+                                <div class="form-text">Enter a direct URL to an image. Leave empty for no image.</div>
+                            </div>
+
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                                <a href="/admin/listings" class="btn btn-outline-secondary">
+                                    <i class="fas fa-times me-1"></i>Cancel
+                                </a>
+                                <button type="submit" class="btn btn-admin btn-lg">
+                                    <i class="fas fa-plus me-1"></i>Create Listing
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Form validation
+        (function () {
+            'use strict'
+            const forms = document.querySelectorAll('.needs-validation')
+            Array.from(forms).forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+        })()
+    </script>
+</body>
+</html>

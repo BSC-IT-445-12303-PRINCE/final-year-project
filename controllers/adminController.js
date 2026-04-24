@@ -226,6 +226,42 @@ module.exports.deleteListing = async (req, res) => {
     }
 };
 
+// Render admin new listing form
+module.exports.renderNewListingForm = (req, res) => {
+    res.render("./listing/users/adminNewListing.ejs");
+};
+
+// Create new listing (admin only)
+module.exports.createListing = async (req, res) => {
+    try {
+        const { title, description, price, location, country, category, image } = req.body;
+        
+        // Get the admin user ID from session
+        const admin = await Admin.findById(req.session.adminId);
+        
+        // Create new listing with admin as owner
+        const newListing = new Listing({
+            title,
+            description,
+            price,
+            location,
+            country,
+            category,
+            images: image ? [{ url: image, filename: "admin_upload" }] : [],
+            owner: null // Admin listings don't have a regular user owner
+        });
+        
+        await newListing.save();
+        
+        req.flash("success", "New listing created successfully!");
+        res.redirect("/admin/listings");
+    } catch (error) {
+        console.error("Error creating listing:", error);
+        req.flash("error", "Failed to create listing");
+        res.redirect("/admin/listings/new");
+    }
+};
+
 // ============== REVIEWS MANAGEMENT ==============
 module.exports.getAllReviews = async (req, res) => {
     try {
